@@ -810,21 +810,14 @@ func connectCmd(cmd *cobra.Command, args []string) {
 
 //
 func cloneCmd(cmd *cobra.Command, args []string) {
-	//git.PlainClone("./", false, &git.CloneOptions{
-	//	URL:               args[0],
-	//	Auth:              nil,
-	//	RemoteName:        "",
-	//	ReferenceName:     "",
-	//	SingleBranch:      false,
-	//	NoCheckout:        false,
-	//	Depth:             0,
-	//	RecurseSubmodules: 0,
-	//	Progress:          os.Stdout,
-	//	Tags:              0,
-	//	InsecureSkipTLS:   false,
-	//	CABundle:          nil,
-	//})
-	exec.Command("git", "clone", args[0])
+	dir := "./"
+	if len(args) == 2 {
+		dir = args[1]
+	}
+	_, err := exec.Command("git", "clone", args[0], dir).Output()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "%v", err.Error())
+	}
 }
 
 // waitForDisconnectSignal is a blocking function that waits for either

@@ -8,6 +8,7 @@ require (
 	github.com/creack/pty v1.1.9
 	github.com/derekparker/trie v0.0.0-20200317170641-1fdf38b7b0e9
 	github.com/go-delve/liner v1.2.2-1
+	github.com/go-git/go-git/v5 v5.4.2 // indirect
 	github.com/google/go-dap v0.6.0
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/kr/text v0.2.0 // indirect

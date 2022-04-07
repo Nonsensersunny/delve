@@ -70,8 +70,8 @@ func NewMakeCommands() *cobra.Command {
 	}
 	Tags = buildCmd.PersistentFlags().StringArray("tags", []string{}, "Build tags")
 	buildCmd.PersistentFlags().BoolVarP(&DisableGit, "no-git", "G", false, "Do not use git")
-	buildCmd.PersistentFlags().StringVar(&Architecture, "GOARCH", "", "Architecture to build for")
-	buildCmd.PersistentFlags().StringVar(&OS, "GOOS", "", "OS to build for")
+	buildCmd.PersistentFlags().StringVar(&Architecture, "GOARCH", "amd64", "Architecture to build for")
+	buildCmd.PersistentFlags().StringVar(&OS, "GOOS", "linux", "OS to build for")
 	RootCommand.AddCommand(buildCmd)
 
 	RootCommand.AddCommand(&cobra.Command{
