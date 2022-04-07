@@ -182,6 +182,21 @@ option to let the process continue or kill it.
 	}
 	rootCommand.AddCommand(connectCommand)
 
+	// 'clone' subcommand
+	cloneCommand := &cobra.Command{
+		Use:   "clone repo",
+		Short: "Clone from a given repo url.",
+		Long:  "Clone a given repo from url with git.",
+		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) == 0 {
+				return errors.New("you must provide a valid git url as the first argument")
+			}
+			return nil
+		},
+		Run: cloneCmd,
+	}
+	rootCommand.AddCommand(cloneCommand)
+
 	// 'dap' subcommand.
 	dapCommand := &cobra.Command{
 		Use:   "dap",
@@ -791,6 +806,25 @@ func connectCmd(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 	os.Exit(connect(addr, nil, conf, debugger.ExecutingOther))
+}
+
+//
+func cloneCmd(cmd *cobra.Command, args []string) {
+	//git.PlainClone("./", false, &git.CloneOptions{
+	//	URL:               args[0],
+	//	Auth:              nil,
+	//	RemoteName:        "",
+	//	ReferenceName:     "",
+	//	SingleBranch:      false,
+	//	NoCheckout:        false,
+	//	Depth:             0,
+	//	RecurseSubmodules: 0,
+	//	Progress:          os.Stdout,
+	//	Tags:              0,
+	//	InsecureSkipTLS:   false,
+	//	CABundle:          nil,
+	//})
+	exec.Command("git", "clone", args[0])
 }
 
 // waitForDisconnectSignal is a blocking function that waits for either
